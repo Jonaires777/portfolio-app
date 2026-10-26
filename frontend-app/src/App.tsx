@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { FileAddOutlined } from "@ant-design/icons";
+import { FileAddOutlined, LoginOutlined } from "@ant-design/icons";
 import { Layout, Menu, theme } from "antd";
 import Fornecedores from "./components/layout/Fornecedores";
 import { useNavigate } from "react-router-dom";
 import { Fornecedor } from "./services/FornecedorService";
 import CommomHeader from "./components/common/CommomHeader";
 import CommomFooter from "./components/common/CommomFooter";
+import SiderLogo from "./components/common/SiderLogo";
+import { useAuth } from "./contexts/AuthContext";
 import useWindowSize from "./hooks/useWindowSize";
 
 const { Sider, Content } = Layout;
@@ -16,6 +18,7 @@ const App: React.FC = () => {
 
   const navigate = useNavigate();
   const { width } = useWindowSize();
+  const { usuario } = useAuth();
 
   const handleNavigate = (link: string) => {
     navigate(link);
@@ -38,7 +41,7 @@ const App: React.FC = () => {
           setCollapsed(broken);
         }}
       >
-        <div />
+        <SiderLogo />
         <Menu
           theme="dark"
           mode="inline"
@@ -46,9 +49,9 @@ const App: React.FC = () => {
           items={[
             {
               key: "1",
-              icon: <FileAddOutlined />,
-              label: "Adicionar",
-              onClick: () => handleNavigate("/create"),
+              icon: usuario ? <FileAddOutlined /> : <LoginOutlined />,
+              label: usuario ? "Adicionar" : "Entrar",
+              onClick: () => handleNavigate(usuario ? "/create" : "/login"),
             },
           ]}
         />

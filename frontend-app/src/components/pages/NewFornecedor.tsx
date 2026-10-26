@@ -7,6 +7,7 @@ import Sider from "antd/es/layout/Sider";
 import SubmitButton from "../common/SubmitButton";
 import CommomFooter from "../common/CommomFooter";
 import CommomHeader from "../common/CommomHeader";
+import SiderLogo from "../common/SiderLogo";
 import fornecedorService from "../../services/FornecedorService";
 import useWindowSize from "../../hooks/useWindowSize";
 
@@ -54,6 +55,7 @@ const NewFornecedor: React.FC = () => {
           setCollapsed(broken);
         }}
       >
+        <SiderLogo />
         <Menu
           theme="dark"
           mode="inline"

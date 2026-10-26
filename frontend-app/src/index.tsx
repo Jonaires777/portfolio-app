@@ -6,6 +6,13 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import NewFornecedor from './components/pages/NewFornecedor';
 import EditFornecedor from './components/pages/EditFornecedor';
+import Login from './components/pages/Login';
+import Register from './components/pages/Register';
+import ForgotPassword from './components/pages/ForgotPassword';
+import ResetPassword from './components/pages/ResetPassword';
+import OAuthCallback from './components/pages/OAuthCallback';
+import RequireAuth from './components/common/RequireAuth';
+import { AuthProvider } from './contexts/AuthContext';
 
 const router = createBrowserRouter([
   {
@@ -14,11 +21,31 @@ const router = createBrowserRouter([
   },
   {
     path: "/create",
-    element: <NewFornecedor />
+    element: <RequireAuth><NewFornecedor /></RequireAuth>
   },
   {
     path: "/edit/:id",
-    element: <EditFornecedor />
+    element: <RequireAuth><EditFornecedor /></RequireAuth>
+  },
+  {
+    path: "/login",
+    element: <Login />
+  },
+  {
+    path: "/register",
+    element: <Register />
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgotPassword />
+  },
+  {
+    path: "/reset-password",
+    element: <ResetPassword />
+  },
+  {
+    path: "/oauth/callback",
+    element: <OAuthCallback />
   },
 ])
 
@@ -27,7 +54,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );
 

@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import { Descriptions, DescriptionsProps, Modal } from "antd";
 import { Fornecedor } from "@/src/services/FornecedorService";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 
 type FornecedorModalProps = {
   open: boolean;
@@ -17,6 +18,7 @@ const FornecedorModal = ({
   setOpen,
 }: FornecedorModalProps) => {
   const navigate = useNavigate();
+  const { usuario } = useAuth();
 
   const items: DescriptionsProps["items"] = [
     { key: "1", label: "Nome", children: content?.nome },
@@ -46,6 +48,7 @@ const FornecedorModal = ({
         cancelText={"Fechar"}
         onOk={() => navigate(`/edit/${content?.id}`)}
         onCancel={() => setOpen(false)}
+        okButtonProps={{ style: usuario ? undefined : { display: "none" } }}
         closeIcon={false}
       >
         <Descriptions

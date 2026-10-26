@@ -8,6 +8,7 @@ import Sider from "antd/es/layout/Sider";
 import SubmitButton from "../common/SubmitButton";
 import CommomFooter from "../common/CommomFooter";
 import CommomHeader from "../common/CommomHeader";
+import SiderLogo from "../common/SiderLogo";
 import useWindowSize from "../../hooks/useWindowSize";
 
 
@@ -76,6 +77,7 @@ const EditFornecedor: React.FC = () => {
         onBreakpoint={(broken) => {
           setCollapsed(broken);
         }}>
+          <SiderLogo />
           <Menu
             theme="dark"
             mode="inline"

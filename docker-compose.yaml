@@ -21,6 +21,8 @@ services:
     environment:
       - MONGO_URI=mongodb://mongodb:27017/insight-challenge
       - MONGO_DATABSE=insight-challenge
+      - JWT_SECRET=troque-este-segredo-local-por-um-valor-longo
+      - FRONTEND_URL=http://localhost:3000
 
   frontend:
     image: front:latest

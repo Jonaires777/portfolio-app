@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { BASE_URL } from "../utils/constants";
+import { BASE_URL, TOKEN_KEY } from "../utils/constants";
 
 class ApiProvider {
   private instance;
@@ -8,6 +8,27 @@ class ApiProvider {
     this.instance = axios.create({
       baseURL: BASE_URL,
     });
+
+    this.instance.interceptors.request.use((config) => {
+      const token = localStorage.getItem(TOKEN_KEY);
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+      return config;
+    });
+
+    // Token expirado ou invalido: limpa a sessao e recarrega como visitante
+    // (rotas protegidas redirecionam para o login pelo RequireAuth)
+    this.instance.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        if (error.response?.status === 401 && localStorage.getItem(TOKEN_KEY)) {
+          localStorage.removeItem(TOKEN_KEY);
+          window.location.reload();
+        }
+        return Promise.reject(error);
+      }
+    );
   }
 
   async get<T>(path: string, options?: AxiosRequestConfig): Promise<T> {
