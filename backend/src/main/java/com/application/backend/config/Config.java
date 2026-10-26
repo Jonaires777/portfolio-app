@@ -20,7 +20,9 @@ public class Config implements CommandLineRunner {
         @Override
         public void run(String... args) throws Exception {
 
-                fornecedorRepository.deleteAll();       
+                if (fornecedorRepository.count() > 0) {
+                        return;
+                }
 
                 Faker faker = new Faker();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
