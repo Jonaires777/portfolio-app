@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { Button, Descriptions, DescriptionsProps, Modal } from "antd";
+import { Descriptions, DescriptionsProps, Modal } from "antd";
 import { Fornecedor } from "@/src/services/FornecedorService";
 import { useNavigate } from "react-router-dom";
 

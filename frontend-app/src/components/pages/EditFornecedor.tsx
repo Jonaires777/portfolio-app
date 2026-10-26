@@ -1,7 +1,7 @@
-import { Button, Flex, Form, Input, Layout, Menu, message, Space } from "antd";
+import { Button, Flex, Form, Input, Layout, Menu, message } from "antd";
 import fornecedorService from "../../services/FornecedorService";
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Content } from "antd/es/layout/layout";
 import { FileAddOutlined, ArrowLeftOutlined } from "@ant-design/icons";
 import Sider from "antd/es/layout/Sider";
@@ -47,7 +47,7 @@ const EditFornecedor: React.FC = () => {
     };
 
     fetchFornecedor();
-  }, [location]);
+  }, [form, id]);
 
   const handleNavigate = (link: string) => {
     navigate(link);

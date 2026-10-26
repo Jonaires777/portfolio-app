@@ -1,5 +1,5 @@
 import { Button, Form, FormInstance } from "antd";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 
 interface SubmitButtonProps {
     form: FormInstance;
@@ -22,7 +22,7 @@ interface SubmitButtonProps {
         .validateFields({ validateOnly: true })
         .then(() => setSubmittable(true))
         .catch(() => setSubmittable(false));
-    }, [form, values]);
+    }, [form, values, setSubmittable]);
   
     return (
       <Button type="primary" htmlType="submit" disabled={!submittable}>

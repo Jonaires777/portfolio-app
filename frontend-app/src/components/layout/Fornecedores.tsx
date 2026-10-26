@@ -1,4 +1,4 @@
-import { List, Popconfirm, Space, Table } from "antd";
+import { Popconfirm, Space, Table } from "antd";
 import {
   DeleteOutlined,
   EyeOutlined,
@@ -46,13 +46,13 @@ const Fornecedores = ({ fornecedores, setFornecedores }: FornecedoresProps) => {
     };
 
     fetchAllFornecedores();
-  }, []);
+  }, [setFornecedores]);
 
   const handleDelete = async (id: string) => {
     try {
       await fornecedorService.deleteForecedor(id);
       setFornecedores((prev) =>
-        prev?.filter((fornecedor) => fornecedor.id != id)
+        prev?.filter((fornecedor) => fornecedor.id !== id)
       );
     } catch (error) {
       throw error;
@@ -105,7 +105,7 @@ const Fornecedores = ({ fornecedores, setFornecedores }: FornecedoresProps) => {
       key: "ação",
       render: (record: Fornecedor) => (
         <Space size="middle">
-          <a className="">
+          <span className="cursor-pointer">
             <Popconfirm
               placement="topLeft"
               onConfirm={() => handleDelete(record.id)}
@@ -121,10 +121,10 @@ const Fornecedores = ({ fornecedores, setFornecedores }: FornecedoresProps) => {
             >
               <DeleteOutlined />
             </Popconfirm>
-          </a>
-          <a>
+          </span>
+          <span className="cursor-pointer">
             <EyeOutlined onClick={() => handleVisualize(record.id)} />
-          </a>
+          </span>
         </Space>
       ),
     },
