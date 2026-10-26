@@ -1,4 +1,4 @@
-# insight-challenge
+# portfolio-app
 
 ## Este projeto foi realizado utilizando Spring Boot + MongoDb + React
 
