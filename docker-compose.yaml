@@ -19,17 +19,21 @@ services:
     depends_on:
       - mongodb
     environment:
-      - MONGO_URI=mongodb://mongodb:27017/insight-challenge
+      - MONGO_URI=mongodb://root:example@mongodb:27017/insight-challenge?authSource=admin
       - MONGO_DATABSE=insight-challenge
       - JWT_SECRET=troque-este-segredo-local-por-um-valor-longo
       - FRONTEND_URL=http://localhost:3000
 
   frontend:
     image: front:latest
-    build: frontend-app
+    build:
+      context: frontend-app
+      args:
+        # O navegador acessa a API pela maquina host, nao pela rede do Docker
+        - REACT_APP_BASE_URL=http://localhost:8080
     container_name: frontend
     ports:
-      - "3000:3000"
+      - "3000:80"
     depends_on:
       - backend
 
